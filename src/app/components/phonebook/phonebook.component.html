@@ -1,0 +1,38 @@
+<h3 style="text-align: center"> Contact book</h3>
+<hr>
+<p *ngIf="phonebookEntries.length < 1"> Phonebook is empty!</p>
+
+<table class="table table-bordered" *ngIf="phonebookEntries.length >= 1">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col" >Name</th>
+    <th scope="col">Title</th>
+    <th scope="col">Contacts</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let entry of phonebookEntries">
+    <td>{{entry.id}}</td>
+    <td>{{entry.name}}</td>
+    <td>{{entry.title}}</td>
+    <td>
+      <ul>
+        <li *ngFor="let phone of entry.phones">
+          <p>
+            {{phone.phone_number}},
+            {{phone.phone_type}}
+            <button (click)="onDeleteContact($event)" class="btn-danger" id="{{phone.id}}">X</button>
+          </p>
+        </li>
+      </ul>
+    </td>
+    <td>
+      <a routerLink="/update/{{entry.id}}">update</a>
+      <br>
+      <button (click)="onDeleteEntry($event)"  class="btn btn-danger" id="{{entry.id}}">delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
